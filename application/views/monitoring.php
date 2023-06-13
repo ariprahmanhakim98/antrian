@@ -13,13 +13,21 @@
   </head>
   <body>
     <section id="header">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="border p-3 text-center">
-                    <div class="card-body">
-                        <h2>Klinik Rina Kasih Sodong</h2>
+        <div class="row p-2">
+            <div class="col-sm-6">
+                <h2 class="text-center">Klinik Rina Kasih Sodong</h2>
+            </div>
+            <div class="col-sm-6">
+                <h2>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="text-end"><?= date('d-m-Y') ?></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-center" id="runningTime"></div>
+                        </div>
                     </div>
-                </div>    
+                </h2>
             </div>
         </div>
     </section>
@@ -191,6 +199,31 @@
             </div>
         </div>
     </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function updateRunningTime() {
+                var currentTime = new Date();
+                var hours = currentTime.getHours();
+                var minutes = currentTime.getMinutes();
+                var seconds = currentTime.getSeconds();
+
+                hours = padZero(hours);
+                minutes = padZero(minutes);
+                seconds = padZero(seconds);
+
+                var timeString = hours + ':' + minutes + ':' + seconds;
+
+                $('#runningTime').text(timeString);
+            }
+
+            function padZero(value) {
+                return value < 10 ? '0' + value : value;
+            }
+
+            setInterval(updateRunningTime, 1000); // Update every 1 second
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   </body>
 </html>
